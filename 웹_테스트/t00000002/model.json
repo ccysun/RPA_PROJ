@@ -1,0 +1,329 @@
+{
+  "contents": [
+    {
+      "id": "vrR0c",
+      "script": "\"10_Config_환경설정_읽기\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Title",
+      "comment": "",
+      "next": "n3V",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "n3V",
+      "script": "ENVIRONMENT.KillProcess()",
+      "parameters": {
+        "name": "EXCEL.EXE",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "KillProcess",
+      "comment": "",
+      "next": "excel_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/KillProcess"
+    },
+    {
+      "id": "workbook_0",
+      "script": "OpenWorkbook()",
+      "parameters": {
+        "path": "{{ R.Config경로 + R.Config파일 }}",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "OpenWorkbook",
+      "comment": "",
+      "next": "tfKY5",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "EXCEL/OpenWorkbook",
+      "target": "excel_0"
+    },
+    {
+      "id": "collection_0",
+      "script": "GetRangeAsCollection()",
+      "parameters": {
+        "sheet": "",
+        "range": " {{ \"B2:C\" + str(count_0) }}",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Config 정보 범위",
+      "comment": "",
+      "next": "XeF",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "EXCEL/GetRangeAsCollection",
+      "target": "excel_0"
+    },
+    {
+      "id": "count_0",
+      "script": "GetNumberOfRows()",
+      "parameters": {
+        "sheet": "",
+        "keyColumn": "2",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "GetNumberOfRows",
+      "comment": "",
+      "next": "collection_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "EXCEL/GetNumberOfRows",
+      "target": "excel_0"
+    },
+    {
+      "id": "XeF",
+      "script": "ForEach( collection_0 )",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "For Each",
+      "comment": "",
+      "next": "TGl",
+      "except": {
+        "method": "none",
+        "param": ""
+      }
+    },
+    {
+      "id": "0Ak",
+      "script": "EndFor",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "EndFor",
+      "comment": "",
+      "next": "H1VN7",
+      "except": {
+        "method": "none",
+        "param": ""
+      }
+    },
+    {
+      "id": "TGl",
+      "script": "G[\"d\"].update({ Item()[0] : Item()[1] })",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "0Ak",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "kOV",
+      "script": "G[\"d\"] = {}",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "변수 초기화(Config정보 저장)",
+      "comment": "",
+      "next": "Hm6AM",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "cr4",
+      "script": "CloseCurrentWorkbook()",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "CloseCurrentWorkbook",
+      "comment": "",
+      "next": "Pgh",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "EXCEL/CloseCurrentWorkbook",
+      "target": "excel_0"
+    },
+    {
+      "id": "Pgh",
+      "script": "Exit()",
+      "parameters": {
+        "force": "True",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Exit",
+      "comment": "",
+      "next": "GfltP",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "EXCEL/Exit",
+      "target": "excel_0"
+    },
+    {
+      "id": "BoG",
+      "script": "G[\"LOG\"] = \"00_Config//환경설정 작업 완료\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "eJ6R4",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "excel_0",
+      "script": "EXCEL.CreateInstance()",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "CreateInstance",
+      "comment": "",
+      "next": "workbook_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "EXCEL/CreateInstance"
+    },
+    {
+      "id": "tfKY5",
+      "script": "sheet_name = list(sht.name for sht in workbook_0.WorkSheets)",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "kOV",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "Hm6AM",
+      "script": "ForEach(sheet_name)",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "For Each",
+      "comment": "",
+      "next": "sheet_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      }
+    },
+    {
+      "id": "H1VN7",
+      "script": "EndFor",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "EndFor",
+      "comment": "",
+      "next": "cr4",
+      "except": {
+        "method": "none",
+        "param": ""
+      }
+    },
+    {
+      "id": "sheet_0",
+      "script": "ActivateSheet()",
+      "parameters": {
+        "index": "{{Index()}}",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "ActivateSheet",
+      "comment": "",
+      "next": "count_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "EXCEL/ActivateSheet",
+      "target": "excel_0"
+    },
+    {
+      "id": "eJ6R4",
+      "script": "ExecuteOther()",
+      "parameters": {
+        "path": "t00000010",
+        "Description": "",
+        "Activation": "false"
+      },
+      "title": "99_Log",
+      "predefine-task": "99_Log",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Predefined Process"
+    },
+    {
+      "id": "GfltP",
+      "script": "G[\"errorToUserFlag\"]=\"false\"\r\nG[\"sender\"]=\"\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "BoG",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    }
+  ],
+  "packages": [
+    "__BuiltIn__",
+    "ENVIRONMENT",
+    "EXCEL",
+    "WIN32",
+    "FILE",
+    "DATETIME",
+    "COMMON"
+  ]
+}

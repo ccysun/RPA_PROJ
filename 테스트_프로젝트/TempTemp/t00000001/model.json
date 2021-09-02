@@ -1,0 +1,76 @@
+{
+  "contents": [
+    {
+      "id": "psJt3",
+      "script": "\"Task1\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Title",
+      "comment": "",
+      "next": "qGQsH",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "qGQsH",
+      "script": "WIN32.MessageBox()",
+      "parameters": {
+        "text": "",
+        "title": "",
+        "Description": "이것은 테스트 메시지 박스 입니다.",
+        "Activation": "false"
+      },
+      "title": "MessageBox",
+      "comment": "",
+      "next": "Ewo9D",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/MessageBox"
+    },
+    {
+      "id": "Ewo9D",
+      "script": "print(\"test\")",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "aCm0G",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "aCm0G",
+      "script": "ExecuteOther()",
+      "parameters": {
+        "path": "t00000002",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "하위 테스크",
+      "predefine-task": "하위태스크",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Predefined Process"
+    }
+  ],
+  "packages": [
+    "__BuiltIn__",
+    "WIN32"
+  ]
+}

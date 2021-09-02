@@ -1,0 +1,14 @@
+{
+  "contents": {
+    "Config경로": {
+      "type": "Text",
+      "key": "Config경로",
+      "value": "C:\\BATEM_RPA_Bot\\aintechno\\RPA_config\\"
+    },
+    "Config파일": {
+      "type": "Text",
+      "key": "Config파일",
+      "value": "Config.xlsx"
+    }
+  }
+}

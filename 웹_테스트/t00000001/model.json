@@ -1,0 +1,320 @@
+{
+  "contents": [
+    {
+      "id": "paoNv",
+      "script": "\"Task1\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Title",
+      "comment": "",
+      "next": "ROF1Z",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "ROF1Z",
+      "script": "ExecuteOther()",
+      "parameters": {
+        "path": "t00000002",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "config",
+      "predefine-task": "00_Config",
+      "comment": "",
+      "next": "I1wYl",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Predefined Process"
+    },
+    {
+      "id": "I1wYl",
+      "script": "ExecuteOther()",
+      "parameters": {
+        "path": "t00000003",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Web",
+      "predefine-task": "10_aintechno_web_ecount_login",
+      "comment": "",
+      "next": "PuL0B",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Predefined Process"
+    },
+    {
+      "id": "PuL0B",
+      "script": "title_0 = G[\"WEB_browser\"].browser.title",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "yFCZ4",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "excel_0",
+      "script": "EXCEL.CreateInstance()",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "CreateInstance",
+      "comment": "",
+      "next": "workbook_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "EXCEL/CreateInstance"
+    },
+    {
+      "id": "workbook_0",
+      "script": "OpenWorkbook()",
+      "parameters": {
+        "path": "C:\\RPA\\Test\\기업모니터링.xlsx",
+        "password": "",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "OpenWorkbook",
+      "comment": "",
+      "next": "xOa0n",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "EXCEL/OpenWorkbook",
+      "target": "excel_0"
+    },
+    {
+      "id": "xOa0n",
+      "script": "MSAA.Maximize()",
+      "parameters": {
+        "path": "WindowControl:1:1#기업모니터링.xlsx - Excel@@XLMAIN>PaneControl:2>ToolBarControl:1>PaneControl:1>PaneControl:1>PaneControl:1>PaneControl:1>TitleBarControl:1",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Maximize Automation",
+      "comment": "",
+      "next": "HB5U7",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/Maximize Automation"
+    },
+    {
+      "id": "SErB9",
+      "script": "Click()",
+      "parameters": {
+        "params": "#ma492",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Click",
+      "comment": "",
+      "next": "BpKN8",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/Click",
+      "target": "G[\"WEB_browser\"]"
+    },
+    {
+      "id": "VO6fy",
+      "script": "MSAA.Maximize()",
+      "parameters": {
+        "path": "WindowControl:1:1#기업모니터링.xlsx - Excel@@XLMAIN>PaneControl:2>ToolBarControl:1>PaneControl:1>PaneControl:1>PaneControl:1>PaneControl:1>TitleBarControl:1",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Maximize Automation",
+      "comment": "",
+      "next": "SVz7V",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/Maximize Automation"
+    },
+    {
+      "id": "SVz7V",
+      "script": "COMMON.Wait()",
+      "parameters": {
+        "term": "3000",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "sSOrd",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Wait"
+    },
+    {
+      "id": "CNn1L",
+      "script": "WIN32.MessageBox()",
+      "parameters": {
+        "text": "",
+        "title": "",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "MessageBox",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/MessageBox"
+    },
+    {
+      "id": "HB5U7",
+      "script": "COMMON.Wait()",
+      "parameters": {
+        "term": "3000",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "qsyNI",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Wait"
+    },
+    {
+      "id": "qsyNI",
+      "script": "MSAA.Maximize()",
+      "parameters": {
+        "path": "{{ win_pth }}",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Maximize Automation",
+      "comment": "",
+      "next": "fdxsA",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/Maximize Automation"
+    },
+    {
+      "id": "fdxsA",
+      "script": "COMMON.Wait()",
+      "parameters": {
+        "term": "3000",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "SErB9",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Wait"
+    },
+    {
+      "id": "sSOrd",
+      "script": "MSAA.Maximize()",
+      "parameters": {
+        "path": "{{ win_pth }}",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Maximize Automation",
+      "comment": "",
+      "next": "CNn1L",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/Maximize Automation"
+    },
+    {
+      "id": "BpKN8",
+      "script": "title_0 = G[\"WEB_browser\"].browser.title",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "cFxul",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "yFCZ4",
+      "script": "win_pth = f\"PaneControl:1:1#{title_0} - Chrome@@Chrome_WidgetWin_1>PaneControl:2>PaneControl:2>PaneControl:1\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "excel_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "cFxul",
+      "script": "win_pth = f\"PaneControl:1:1#{title_0} - Chrome@@Chrome_WidgetWin_1>PaneControl:2>PaneControl:2>PaneControl:1\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "VO6fy",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    }
+  ],
+  "packages": [
+    "__BuiltIn__",
+    "WIN32",
+    "EXCEL",
+    "MSAA",
+    "WEB",
+    "COMMON",
+    "IMAGE"
+  ]
+}

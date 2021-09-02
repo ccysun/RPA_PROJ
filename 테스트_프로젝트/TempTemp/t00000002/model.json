@@ -1,0 +1,42 @@
+{
+  "contents": [
+    {
+      "id": "KTBrq",
+      "script": "\"Task1\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Title",
+      "comment": "",
+      "next": "xBVKy",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "xBVKy",
+      "script": "WIN32.MessageBox()",
+      "parameters": {
+        "text": "테스트",
+        "title": "테스트 타이틀",
+        "Description": "이것은 하위 태스크 테스트 입니다.",
+        "Activation": "true"
+      },
+      "title": "MessageBox",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/MessageBox"
+    }
+  ],
+  "packages": [
+    "__BuiltIn__",
+    "WIN32"
+  ]
+}

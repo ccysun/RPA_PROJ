@@ -1,0 +1,681 @@
+{
+  "contents": [
+    {
+      "id": "DFr6b",
+      "script": "\"아인테크노 테스트\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Title",
+      "comment": "",
+      "next": "jOo5L",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "browser_0",
+      "script": "WEB.Open()",
+      "parameters": {
+        "browser": "Chrome",
+        "url": "https://logincb.ecount.com/ECERP/ECP/ECP050M?vrqa=Cvi9I+e+fPXswv/3uRF7MSb76mO99AITt6hujP9fIX+Y/jS+6eNjF1nBxTyRcxYn5miJfpEBoBENP61B2rM0Hw==&vrqb=54505d4058465c5a56445e46575b5b4459474b5a58100b4401020d450a4204575b175a1751535a410c41560256410c4301550d5b5e&vrqc=1",
+        "encoding": "utf-8",
+        "reuse": "True",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Open browser",
+      "comment": "",
+      "next": "svhdL",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/Open browser"
+    },
+    {
+      "id": "QrOna",
+      "script": "SetValue()",
+      "parameters": {
+        "params": "#id",
+        "value": "{{G[\"d\"][\"e_Id\"]}}",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "SetValue",
+      "comment": "",
+      "next": "DRJzm",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/SetValue",
+      "target": "G[\"WEB_browser\"]"
+    },
+    {
+      "id": "DRJzm",
+      "script": "SetValue()",
+      "parameters": {
+        "params": "#passwd",
+        "value": "{{G[\"d\"][\"e_Pwd\"]}}",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "SetValue",
+      "comment": "",
+      "next": "VKEnM",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/SetValue",
+      "target": "G[\"WEB_browser\"]"
+    },
+    {
+      "id": "oBSrA",
+      "script": "SetValue()",
+      "parameters": {
+        "params": "#com_code",
+        "value": "{{G[\"d\"][\"e_Code\"]}}",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "SetValue",
+      "comment": "",
+      "next": "QrOna",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/SetValue",
+      "target": "G[\"WEB_browser\"]"
+    },
+    {
+      "id": "VKEnM",
+      "script": "Wait()",
+      "parameters": {
+        "params": "#save",
+        "timeout": "30",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "iC4jk",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/Wait",
+      "target": "G[\"WEB_browser\"]"
+    },
+    {
+      "id": "XZDzk",
+      "script": "Wait()",
+      "parameters": {
+        "params": "#ecdivpop > div > div.footer.footer-fixed > div > button.btn.btn-primary",
+        "timeout": "5",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait: 팝업창 대기",
+      "comment": "",
+      "next": "AQ1yo",
+      "except": {
+        "method": "jump",
+        "param": "Kqr6J"
+      },
+      "command": "WEB/Wait",
+      "target": "G[\"WEB_browser\"]"
+    },
+    {
+      "id": "AQ1yo",
+      "script": "Click()",
+      "parameters": {
+        "params": "#ecdivpop > div > div.footer.footer-fixed > div > button.btn.btn-primary",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Click",
+      "comment": "",
+      "next": "Kqr6J",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/Click",
+      "target": "G[\"WEB_browser\"]"
+    },
+    {
+      "id": "cyzgN",
+      "script": "COMMON.Wait()",
+      "parameters": {
+        "term": "1000",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "yvSqj",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Wait"
+    },
+    {
+      "id": "Kqr6J",
+      "script": "Wait()",
+      "parameters": {
+        "params": "#ma4",
+        "timeout": "30",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "cyzgN",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/Wait",
+      "target": "G[\"WEB_browser\"]"
+    },
+    {
+      "id": "jOo5L",
+      "script": "\"ECERP 웹 접속테스트\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "browser_0",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "svhdL",
+      "script": "G[\"WEB_browser\"] = browser_0",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "GPlRp",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "iC4jk",
+      "script": "Click()",
+      "parameters": {
+        "params": "#save",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Click",
+      "comment": "",
+      "next": "bWyzv",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/Click",
+      "target": "G[\"WEB_browser\"]"
+    },
+    {
+      "id": "bWyzv",
+      "script": "COMMON.Wait()",
+      "parameters": {
+        "term": "1000",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "XZDzk",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Wait"
+    },
+    {
+      "id": "EOZXx",
+      "script": "MSAA.Minimize()",
+      "parameters": {
+        "path": "PaneControl:1:1#판매현황 - Chrome@@Chrome_WidgetWin_1",
+        "Description": "",
+        "Activation": "false"
+      },
+      "title": "Minimize Automation",
+      "comment": "",
+      "next": "wIIyk",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/Minimize Automation"
+    },
+    {
+      "id": "yvSqj",
+      "script": "Wait()",
+      "parameters": {
+        "params": "#ma4",
+        "timeout": "30",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "PDxHO",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/Wait",
+      "target": "browser_0"
+    },
+    {
+      "id": "PDxHO",
+      "script": "COMMON.Wait()",
+      "parameters": {
+        "term": "1000",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "NQZbC",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Wait"
+    },
+    {
+      "id": "NQZbC",
+      "script": "Click()",
+      "parameters": {
+        "params": "#ma4",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Click",
+      "comment": "",
+      "next": "BcAo1",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/Click",
+      "target": "browser_0"
+    },
+    {
+      "id": "BcAo1",
+      "script": "Wait()",
+      "parameters": {
+        "params": "#ma494",
+        "timeout": "30",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "m6luy",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/Wait",
+      "target": "browser_0"
+    },
+    {
+      "id": "m6luy",
+      "script": "Click()",
+      "parameters": {
+        "params": "#ma494",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Click",
+      "comment": "",
+      "next": "xvj4W",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/Click",
+      "target": "browser_0"
+    },
+    {
+      "id": "GTfjH",
+      "script": "COMMON.Wait()",
+      "parameters": {
+        "term": "1000",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "zoYuU",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Wait"
+    },
+    {
+      "id": "zoYuU",
+      "script": "Wait()",
+      "parameters": {
+        "params": "#mainPage > div.header.header-fixed > div.wrapper-header-search > div.tab-content > div:nth-child(1) > ul > li:nth-child(2) > div.form > div:nth-child(1) > div > div > input:nth-child(2)",
+        "timeout": "30",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait: 년도 대기",
+      "comment": "",
+      "next": "Pr13K",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/Wait",
+      "target": "browser_0"
+    },
+    {
+      "id": "Pr13K",
+      "script": "COMMON.Wait()",
+      "parameters": {
+        "term": "6000",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "lZYjF",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Wait"
+    },
+    {
+      "id": "wIIyk",
+      "script": "G[\"LOG\"]=\"10_aintechno_web_ecount_login//ecount_로그인 성공.\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "vqEpI",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "vqEpI",
+      "script": "ExecuteOther()",
+      "parameters": {
+        "path": "t00000010",
+        "Description": "",
+        "Activation": "false"
+      },
+      "title": "99_Log",
+      "predefine-task": "99_Log",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Predefined Process"
+    },
+    {
+      "id": "x2Voy",
+      "script": "MSAA.Minimize()",
+      "parameters": {
+        "path": "PaneControl:1:1#판매조회 - Chrome@@Chrome_WidgetWin_1",
+        "Description": "",
+        "Activation": "false"
+      },
+      "title": "Minimize Automation",
+      "comment": "",
+      "next": "wIIyk",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/Minimize Automation"
+    },
+    {
+      "id": "lZYjF",
+      "script": "IMAGE.Wait()",
+      "parameters": {
+        "image": "image_4",
+        "timeout": "2000",
+        "module": "gdi32",
+        "confidence": "90%",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait for Image",
+      "comment": "",
+      "next": "x2Voy",
+      "except": {
+        "method": "jump",
+        "param": "EOZXx"
+      },
+      "command": "WIN32/Wait for Image"
+    },
+    {
+      "id": "HLs66",
+      "script": "Wait()",
+      "parameters": {
+        "params": "#ui-id-1 > div.panel-footer > div",
+        "timeout": "5",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "uaCaH",
+      "except": {
+        "method": "jump",
+        "param": "EpDq8"
+      },
+      "command": "WEB/Wait",
+      "target": "browser_0"
+    },
+    {
+      "id": "uaCaH",
+      "script": "Click()",
+      "parameters": {
+        "params": "#btn_alert1",
+        "encoding": "utf-8",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Click",
+      "comment": "",
+      "next": "EpDq8",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WEB/Click",
+      "target": "browser_0"
+    },
+    {
+      "id": "xvj4W",
+      "script": "ForEach(range(4))",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "For Each",
+      "comment": "Loop",
+      "next": "HLs66",
+      "except": {
+        "method": "none",
+        "param": ""
+      }
+    },
+    {
+      "id": "xIfbG",
+      "script": "EndFor",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "EndFor",
+      "comment": "Loop",
+      "next": "GTfjH",
+      "except": {
+        "method": "none",
+        "param": ""
+      }
+    },
+    {
+      "id": "EpDq8",
+      "script": "\"사이트 팝업창 닫기용 loop\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "xIfbG",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "GPlRp",
+      "script": "MSAA.SetFocus()",
+      "parameters": {
+        "path": "PaneControl:1:1#이카운트 로그인 | ECOUNT ERP - Chrome@@Chrome_WidgetWin_1>DocumentControl:1|4094736",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "SetActive Automation",
+      "comment": "",
+      "next": "Go4gN",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/SetActive Automation"
+    },
+    {
+      "id": "Go4gN",
+      "script": "COMMON.Wait()",
+      "parameters": {
+        "term": "2000",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Wait",
+      "comment": "",
+      "next": "oBSrA",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/Wait"
+    },
+    {
+      "id": "onerror_0",
+      "script": "PRE-PROCESSING!SetOnError()",
+      "parameters": {
+        "importance": "100",
+        "comment": "On Error",
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "On Error",
+      "comment": "",
+      "next": "QLYvN",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "COMMON/On Error"
+    },
+    {
+      "id": "QLYvN",
+      "script": "G[\"errorToUser\"]=\"web ecount erp접속 및 로그인 하는 과정에서 오류가 발생했습니다.\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "ZkeXQ",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "ZkeXQ",
+      "script": "G[\"errorToUserFlag\"]=\"true\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Process",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    }
+  ],
+  "packages": [
+    "__BuiltIn__",
+    "WEB",
+    "WIN32",
+    "EXCEL",
+    "MSAA",
+    "COMMON",
+    "IMAGE",
+    "ENVIRONMENT",
+    "EMAIL"
+  ]
+}
