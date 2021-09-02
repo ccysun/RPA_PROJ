@@ -1,0 +1,23 @@
+{
+  "contents": [
+    {
+      "id": "NFeyE",
+      "script": "\"Task1\"",
+      "parameters": {
+        "Description": "",
+        "Activation": "true"
+      },
+      "title": "Title",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    }
+  ],
+  "packages": [
+    "__BuiltIn__"
+  ]
+}
