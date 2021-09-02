@@ -1,2 +1,0 @@
-모니터링 Item1-Pass
-모니터링 Item2-Pass

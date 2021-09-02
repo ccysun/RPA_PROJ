@@ -1,8 +1,0 @@
-(Activity)	WIN32/Execute
-command	C:\{프로젝트}\DelTempFile.bat
-
-# DelTempFile.bat  파일 내용 
-rem %temp% 는 C:\Users\{사용자이름}\AppData\Local\Temp\
-del /s /q %temp%\*.* > null
-
-del /s /q C:\Temp\*.* > nul

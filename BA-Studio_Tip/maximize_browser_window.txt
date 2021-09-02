@@ -1,9 +1,0 @@
-## Process: 현재 브라우저의 타이틀 값
-title_0 = browser_0.browser.title
-
-## Process: 타이틀 값으로 win path 문자열 생성
-win_pth = f"PaneControl:1:1#{ title_0 } - Chrome"
-
-## Maximize Automation: 창 최대화  또는 SetActive Automation 할것  
-{{ win_pth }}
-

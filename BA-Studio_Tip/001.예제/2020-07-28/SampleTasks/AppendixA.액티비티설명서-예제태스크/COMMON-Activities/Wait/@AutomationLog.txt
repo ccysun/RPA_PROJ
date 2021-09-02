@@ -1,1 +1,0 @@
-WindowPattern is not supported!
