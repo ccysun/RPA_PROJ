@@ -1,0 +1,35 @@
+{
+  "contents": [
+    {
+      "id": "Hfv",
+      "script": "\"CS실적-보고서\"",
+      "parameters": {},
+      "title": "Process",
+      "comment": "",
+      "next": "HZD",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "HZD",
+      "script": "ExecuteOther()",
+      "parameters": {
+        "path": "t00000002"
+      },
+      "title": "CS실적_보고서",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Predefined Process"
+    }
+  ],
+  "packages": [
+    "__BuiltIn__"
+  ]
+}

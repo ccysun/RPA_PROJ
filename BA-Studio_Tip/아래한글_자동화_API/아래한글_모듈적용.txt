@@ -1,0 +1,109 @@
+** 아래한글 모듈 적용 
+
+    1. 레지스트리에 반영
+-------------------------------------------HwpAutomation.reg
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\SOFTWARE\Hnc\HwpAutomation\Modules]
+"AutomationModule"="C:\\Program Files (x86)\\Hnc\\HwpAutomation\\Modules\\FilePathCheckerModuleExample.dll"
+
+-------------------------------------------------------------------------
+위 코드를 reg 파일로 만들어서 실행하여 레지스트리에 반영한다. 
+
+
+    2. 보안승인모듈 다운받아 특정경로에 파일 복사
+    https://www.hancom.com/board/devdataView.do?board_seq=47&artcl_seq=4085&pageInfo.page=&search_text=
+    위 페이지에 접속하여 "보안모듈(Automation).zip" 파일을 다운 받는다. 
+    다운받은 파일 압축을 풀어 "FilePathCheckerModuleExample.dll" 이 파일을 
+    "C:\Program Files (x86)\Hnc\HwpAutomation\Modules\FilePathCheckerModuleExample.dll"
+    위 경로에 복사 하기 
+    
+    3. 커스텀 모듈에 적용하기 
+    hwp = win32.gencache.EnsureDispatch("HWPFrame.HwpObject")  #아래한글 인스턴스/오브젝트 생성
+    hwp.RegisterModule("FilePathCheckDLL", "AutomationModule") #보안모듈 자동승인 -> regedit에서 등록해야 함.
+    hwp.XHwpWindows.Item(0).Visible = True  # 숨김해제
+    위 3줄의 코드를 먼저 선언 후 사용하면 된다. 
+    ※중요, "AutomationModule" 이 것은 위 레지스트리에 등록된 key 이므로 꼭 등록된 key를 코드에 입력 해야 된다. 
+
+    4. 아래한글 커스텀모듈 작성
+    도구 -> 매크로 정의 
+    매크로 이름을 입력 하고 "정의" 클릭 하여 기록
+    내용을 입력 , 표 등을 그려기, 편집하고자 하는 내용등을 입력 ....
+
+    도구 -> 매크로 중지 (ALT + SHIFT + X )
+    도구 -> 매크로 -> 매크로 실행 ( ALT + SHIFT + L )
+
+    기록한 매크로를 선택 후 "코드편집" 클릭 하면 매크로 스크립트 편집기가 오른쪽에 열림 
+    그러면 아래와 같이 코드가 입력된 것을 볼수 있다. 
+-----------------------------------------------------------------
+function OnScriptMacro_매크로_테스트()
+{
+    HAction.GetDefault("InsertText", HParameterSet.HInsertText.HSet);
+    HParameterSet.HInsertText.Text = "우리들은 사람";
+    HAction.Execute("InsertText", HParameterSet.HInsertText.HSet);
+    HAction.Run("BreakPara");
+    HAction.Run("MoveUp");
+    HAction.Run("MoveSelLineEnd");
+    HAction.GetDefault("CharShape", HParameterSet.HCharShape.HSet);
+    with (HParameterSet.HCharShape)
+    {
+        FontTypeUser = FontType("TTF");
+        FontTypeSymbol = FontType("TTF");
+        FontTypeOther = FontType("TTF");
+        FontTypeJapanese = FontType("TTF");
+        FontTypeHanja = FontType("TTF");
+        FontTypeLatin = FontType("TTF");
+        FontTypeHangul = FontType("TTF");
+        Height = PointToHwpUnit(32.0);
+    }
+    HAction.Execute("CharShape", HParameterSet.HCharShape.HSet);
+}
+
+function OnScriptMacro_쪽번호위치찾기()
+{
+    HAction.GetDefault("Goto", HParameterSet.HGotoE.HSet);
+    with (HParameterSet.HGotoE)
+    {
+        HSet.SetItem("DialogResult", 49);
+        SetSelectionIndex = 5;
+    }
+    HAction.Execute("Goto", HParameterSet.HGotoE.HSet);
+}
+-----------------------------------------------------------------
+위 코드들을 hwp 오브젝트만 앞에 "." 으로 붙여 커스텀 모듈로 사용 가능 하다. 
+
+
+
+※ 예,  아래와 같이 한글 매크로 스크립트가 작성 된경우 
+function OnScriptMacro_script3()
+{
+    HAction.GetDefault("PageSetup", HParameterSet.HSecDef.HSet);
+    with (HParameterSet.HSecDef)
+    {
+        HSet.SetItem("ApplyClass", 24);
+        HSet.SetItem("ApplyTo", 3);
+        PageDef.LeftMargin = MiliToHwpUnit(0.0);
+        PageDef.RightMargin = MiliToHwpUnit(0.0);
+        PageDef.TopMargin = MiliToHwpUnit(0.0);
+        PageDef.BottomMargin = MiliToHwpUnit(0.0);
+        PageDef.HeaderLen = MiliToHwpUnit(0.0);
+        PageDef.FooterLen = MiliToHwpUnit(0.0);
+    }
+    HAction.Execute("PageSetup", HParameterSet.HSecDef.HSet);
+}
+******위 스크립트 아래와 같이 변경
+ 
+hwp.HAction.GetDefault("PageSetup", hwp.HParameterSet.HSecDef.HSet)  # 액션생성
+hwp.HParameterSet.HSecDef.HSet.SetItem("ApplyClass", 24)  # 적용범위 구분. 없어도 됨
+hwp.HParameterSet.HSecDef.HSet.SetItem("ApplyTo", 3)  # 적용범위. 필수
+hwp.HParameterSet.HSecDef.PageDef.LeftMargin = hwp.MiliToHwpUnit(0.0)  # 파라미터셋 설정
+hwp.HParameterSet.HSecDef.PageDef.RightMargin = hwp.MiliToHwpUnit(0.0)
+hwp.HParameterSet.HSecDef.PageDef.TopMargin = hwp.MiliToHwpUnit(0.0)
+hwp.HParameterSet.HSecDef.PageDef.BottomMargin = hwp.MiliToHwpUnit(0.0)
+hwp.HParameterSet.HSecDef.PageDef.HeaderLen = hwp.MiliToHwpUnit(0.0)
+hwp.HParameterSet.HSecDef.PageDef.FooterLen = hwp.MiliToHwpUnit(0.0)
+hwp.HAction.Execute("PageSetup", hwp.HParameterSet.HSecDef.HSet)  # 해당액션 실행(파라미터셋 적용)
+
+
+
+

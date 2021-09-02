@@ -1,0 +1,134 @@
+
+
+1. open browser : https://finance.naver.com/sise/lastsearch2.nhn  접속
+
+2. 검색 상위 종복 엑셀 저장 
+
+3. 저장한 엑셀 개인별 종목으로 엑셀 분리 
+
+4. 분리한 엑셀 파일 개인별 메일 전송 
+
+5. RPA 확인 결과 메일 관리자 메일 전송 
+
+
+
+또는 다음 전종목 시세 엑셀로 저장 (코스피)
+http://finance.daum.net/domestic/all_stocks
+
+
+
+코스닥
+http://finance.daum.net/domestic/all_stocks?market=KOSDAQ
+
+
+
+
+
+---- Tip ----
+ ** 명명 규칙 
+1. 스네이크 표기법(Snake Case 단어 사이에 언더바를 넣어서 표기하는 방법)을 원칙으로 한다. 
+
+2. 함수의 이름 : 
+함수의 이름은 원칙적으로 소문자여야 하고, 가독성을 위해서 밑줄(_)로 단어를 나눌 수 있다. 
+
+3. 변수의 이름 : 
+중복이 되지 않도록 한다.  
+소문자가 원칙이며, 가능하면 목적에 합당한 단어로 구성한다. 
+가독성을 위해 밑줄(_)로 단어 사이에 넣을수 있지만 가능하면 넣지 않는 방향으로 
+단어를 선택한다. 
+
+4. 프로젝트명은 전부 대문자로 단어사이에 밑줄(_)로 표기한다. 
+
+5. BATEM Task File 로 작성하는 경우 파일명을 01.config.fp, 02.Main.fp  ...  순서를 
+정할수 있는 숫자가 먼저 오는 파일명으로 작성할 수 있다. 
+--------------------
+
+
+
+* cell 선택 
+ActivateSheet 다음으로
+Process 
+sheet_0.Range("A1").Select()
+
+* 다중 cell 선택 
+ActivateSheet 다음으로
+Process 
+sheet_0.Range("A1:D1").Select()
+
+* 사용되어진 cell 전체 선택 
+Process
+sheet_0.Range('A2').CurrentRegion.Select()
+
+* 필터넣기 
+Type Keys
+alt A T 
+
+* 필터넣기 다른 방법 
+ActivateSheet 다음으로
+Process 
+sheet_0.Range("A1").AutoFilter()
+
+* AutoFilter 인자 값을 적용하여 필터 적용
+조건이 1개인경우 
+sheet_0.Range("$A$2:$D$12").AutoFilter(Field=1, Criteria1="애플")
+또는 Range 에 절대값으로 $A:$D 로 적용도 가능
+sheet_0.Range("$A:$D").AutoFilter(Field=1, Criteria1="애플")
+Field 는 index 왼쪽부터 시작함 (1부터 시작)
+Criteria1는 조건절
+
+조건이 2개 이상인 경우 
+sheet_0.Range("$A$2:$D$12").AutoFilter(Field=4, Criteria1=">600000", Operator=2, Criteria2="=1200000")
+또는 Range 에 절대값으로 $A:$D 로 적용도 가능
+sheet_0.Range("$A:$D").AutoFilter(Field=4, Criteria1=">600000", Operator=2, Criteria2="=1200000")
+Field 는 index 왼쪽부터 시작함 (1부터 시작)
+Criteria1, Criteria2 조건절 
+Operator  1 And,  2 Or 
+
+* AutoFiler 로 필터를 걸었다가  필터해제 방법은 
+sheet_0.Range("A1").AutoFilter()  
+AutoFiler 함수를 한번더 수행하면 해제가 됨.
+
+* AutoFilter   조건절에  특정 문자열이 포함된 경우 찾기
+sheet_0.Range("$A:$D").AutoFilter(Field=3, Criteria1="=*PH*", Operator=1)
+문자열 사이에 별문자(*) 를 입력하여 수행 
+
+
+
+
+
+
+Web css path 찾기 
+
+찾고자 하는 항목에  클릭 후 오른쪽 우클릭 "요소검사" 
+id 가 나올때까지 위로 올라간다. 
+예) 
+<div id="boxTopStocks">
+    <div class="colorB">
+        <div class="colorB">
+            <table class="downB mr">
+                <tbody>
+                   <tr class="">
+                       <th class=""> 키움증권 </th>         ==> 이부분 찾을 위치 
+#boxTopStocks > div > div > table > tbody > tr > td
+
+id는 #으로 나타낼수 있다. 
+위 처럼 찾을위치를 path 로 한 줄로 입력 
+
+#boxTopStocks > div > div > table > tbody > tr , td
+위 처럼 쉼표로 나누어 찾을 수도 있다. 
+
+
+
+
+IE params 찾는 방법
+요소검사 (마우스 우클릭 매뉴) 후 
+제일 밑 상태바에 css path 가 나오는데 오른쪽 끝 부분 에서 순차적으로 왼쪽으로 옮겨 가면서 본다.  
+첫번째로 나오는 '#' 부분부터 입력하면된다. 
+
+예)
+html.os_window > body > div#daumWrap > head#daumHead > div.d_service > div.inner_service > div#gnbServiceList > ul.list_mainsvc > li > a.txt_pctop 
+                                                                                               ↑ 부분부터 입력 하면 입력 하면 된다. 
+#gnbServiceList > ul.list_mainsvc > li > a.txt_pctop 
+위처럼 입력하면 되는데 소스에서 보면 "li" 태그가 여러개여서 순차적으로 봤을때 6번째이다면 li:nth-child(6) 으로 추가해서 입력하면 된다. 
+최종적으로 
+"#gnbServiceList > ul.list_mainsvc > li:nth-child(6) > a.txt_pctop"  이렇게 입력해주면 된다. 

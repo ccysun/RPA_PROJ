@@ -1,0 +1,40 @@
+
+아래함수는 어떤 항목( 해당 페이지는 세금계산서 부분이었음 ) 클릭하면  신규 팝업창이 뜸  그 신규 팝업창을 정보를 가져오는 함수임 
+
+
+
+process 에서 처리하는부분 
+
+G["Compnm"],G["Ceonm"],G["Busi"],G["Jongm"],G["Addr"],G["Mail"]= GetData(G["browser"],lidx) 
+
+해당 팝업에서가져오는 정보를 변수로  해당함수를 call 
+
+
+
+함수 설정부분 
+
+def GetData(browser,idx):  
+	#세금계산서 클릭
+	browser.FindElements("#contents > form:nth-child(4) > div.table_wrap > table > thead >  tr:nth-child(" + str(idx) + ") > td:nth-child(21) > a")[0].Click()
+
+	#Popup창으로 이동
+	while(len(browser.browser.window_handles) == 1):
+		pass
+	browser.SwitchToWindow(-1)
+
+	#데이터 회득
+	browser.Wait("#popup > div.popup_con > form > table > tbody > tr:nth-child(3) > td")
+	Compnm = browser.GetText("#popup > div.popup_con > form > table > tbody > tr:nth-child(3) > td")
+	Ceonm = browser.Select(css="#popup > div.popup_con > form > table > tbody > tr:nth-child(6) > td > input[type=text]").GetAttribute("value")
+	Busi = browser.Select("#popup > div.popup_con > form > table > tbody > tr:nth-child(7) > td > input[type=text]").GetAttribute("value")
+	Jongm = browser.Select("#popup > div.popup_con > form > table > tbody > tr:nth-child(8) > td > input[type=text]").GetAttribute("value")
+	Addr = browser.Select("#popup > div.popup_con > form > table > tbody > tr:nth-child(9) > td > input[type=text]").GetAttribute("value")
+	Mail = browser.GetText("#popup > div.popup_con > form > table > tbody > tr:nth-child(10) > td")
+
+	#Popup창 닫기
+	browser.browser.close()
+	#원래창으로 이동
+	browser.SwitchToWindow(-1)
+ 
+	return Compnm,Ceonm,Busi,Jongm,Addr,Mail
+	

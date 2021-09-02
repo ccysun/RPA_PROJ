@@ -1,0 +1,18 @@
+import win32gui
+
+hwnd = win32gui.FindWindow(None, "빈 문서 1 - 한글")
+win32gui.SetForegroundWindow(hwnd)
+
+
+def FindWin(name):
+    hwnd = win32gui.FindWindow(None, name)
+    print(hwnd)
+    if (hwnd > 0):
+        win32gui.SetForegroundWindow(hwnd)
+
+
+
+
+FindWin("RPA_경기스마트산단_입주기업_분석리포트.hwp [C:\RPA\스마트산단\] - 한글")
+FindWin("빈 문서 1 - 한글")
+

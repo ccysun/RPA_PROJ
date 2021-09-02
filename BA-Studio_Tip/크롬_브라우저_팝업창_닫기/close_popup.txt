@@ -1,0 +1,14 @@
+
+
+def close_popup(bw):
+    hdls = bw.browser.window_handles # 윈도우 리스트 배열로 받음
+    size = len(hdls)
+    if size > 1:
+        main_hdl = bw.browser.current_window_handle # Open browser 로 접속한 사이트 윈도우
+        for x in range(size):
+            if hdls[x] != main_hdl:
+                bw.SwitchToWindow(1) # 팝업을 닫으면 윈도우 리스트가 감소 되므로
+                bw.browser.close()
+        bw.SwitchToWindow(0)
+
+   

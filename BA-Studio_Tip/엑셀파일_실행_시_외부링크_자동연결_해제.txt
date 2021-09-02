@@ -1,0 +1,27 @@
+
+
+# 엑셀 파일 실행 시, 외부링크 자동연결 업데이트 해제 하기 
+엑셀 
+파일 -> 옵션 -> 고급 
+일반
+자동 연결 업데이트 확인    : 체크박스를 해제   후 엑셀 재 실행 
+
+
+연결편집 후 연결끊기 후 엑셀 사용 할것 
+
+
+
+
+
+연결끊기 매크로
+
+Sub BreakLinks()
+'Updateby20140318
+Dim wb As Workbook
+Set wb = Application.ActiveWorkbook
+If Not IsEmpty(wb.LinkSources(xlExcelLinks)) Then
+    For Each link In wb.LinkSources(xlExcelLinks)
+        wb.BreakLink link, xlLinkTypeExcelLinks
+    Next link
+End If
+End Sub

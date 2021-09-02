@@ -1,0 +1,57 @@
+윈도우 찾기
+
+
+참고: https://wikidocs.net/79779
+https://msdn.microsoft.com/en-us/library/windows/desktop/dd318521%28v=vs.85%29.aspx
+
+
+win32gui 모듈 설치
+
+먼저 설치해야 아래 실행 가능
+
+pip install pypiwin32
+
+
+
+윈도우 찾기
+
+
+Findwindow() 로 메인 창을 찾는다.
+
+win32gui 모듈에 Findwindow() 가 구현되어있다.
+
+
+
+예)
+
+import win32gui
+import win32con
+hwnd = win32gui.FindWindow(None, "메모장")
+
+창 최대화
+win32gui.ShowWindow(hwnd, win32con.SW_MAXIMIZE)
+
+print(hwnd)
+
+윈도우 닫기
+PostMessage() 함수로 닫는다.
+    import win32gui
+    import win32con
+    hwnd = win32gui.FindWindow(None, "메모장")
+    win32gui.PostMessage(hwnd, win32con.WM_CLOSE, 0, 0)
+
+
+FlashWindowsEx()
+    win32gui.FlashWindowEx()
+    int = FlashWindowEx(hwnd, dwFlags , uCount , dwTimeout )
+
+int = FlashWindow(hwnd, bInvert )
+
+
+
+
+
+
+
+# 확인할 ...
+win32gui.GetWindowText(win32gui.GetForegroundWindow())

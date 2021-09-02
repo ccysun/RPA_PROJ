@@ -1,0 +1,15 @@
+https://ko.extendoffice.com/documents/excel/1173-excel-break-all-links.html
+
+위 참조
+
+
+Sub BreakLinks()
+'Updateby20140318
+Dim wb As Workbook
+Set wb = Application.ActiveWorkbook
+If Not IsEmpty(wb.LinkSources(xlExcelLinks)) Then
+    For Each link In wb.LinkSources(xlExcelLinks)
+        wb.BreakLink link, xlLinkTypeExcelLinks
+    Next link
+End If
+End Sub

@@ -1,0 +1,7 @@
+
+>>> import re
+>>> str1 = "성능69"
+>>> num1 = re.findall("\d+", str1)
+>>> num1
+['69']
+

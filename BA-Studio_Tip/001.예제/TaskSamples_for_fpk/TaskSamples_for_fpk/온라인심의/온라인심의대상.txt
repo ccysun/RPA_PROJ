@@ -1,0 +1,2 @@
+A사 제품A: Pass/Fail
+B사 제품A: Pass/Fail

@@ -1,0 +1,378 @@
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+|  참고 사이트 
+|  Excel reference -> https://docs.microsoft.com/ko-kr/office/vba/api/overview/excel
+|  Excel Macro -> https://trumpexcel.com/record-macro-vba/
+|
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+
+엑셀 매크로 기능을 이용하여 필터 적용 해보기 
+필터 적용 후 매크로 보기 하면 
+예)
+Sub 매크로1()
+'
+' 매크로1 매크로
+'
+
+'
+    Range("A2:D2").Select
+    Selection.AutoFilter
+    ActiveSheet.Range("$A$2:$D$12").AutoFilter Field:=4, Criteria1:=">600000", _
+        Operator:=xlAnd, Criteria2:="=550000"
+End Sub
+xlAnd 상수값 확인   더블클릭 후 Ctrl + I  확인 가능
+xlAnd : 1
+xlOr : 2
+-------------------------------------
+
+ActiveSheet.Range("$A$2:$D$12").AutoFilter Field:=1, Criteria1:="애플"
+위 부분을 
+sheet_0.Range("$A$2:$D$12").AutoFilter(Field=1, Criteria1="애플")
+sheet_0.Range("$A$2:$D$12").AutoFilter(Field=4, Criteria1=">1200000")
+이렇게 고치면 필터 적용이 됨니다. 
+
+조건이 2개인경우 
+sheet_0.Range("$A$2:$D$12").AutoFilter(Field=4, Criteria1=">600000", Operator=2, Criteria2="=1200000")
+
+Range 에 절대값으로 $A:$D 로 적용도 가능  Operator=1: AND
+sheet_0.Range("$A:$D").AutoFilter(Field=4, Criteria1=">600000", Operator=1, Criteria2="=1200000")
+
+Like 필터 (포함)
+sheet_0.Range("$A:$D").AutoFilter(Field=3, Criteria1="=*PH*", Operator=1)
+
+
+
+# 필터 걸기   sheet_1 : ActiveSheet 액티비티 name
+sheet_0.Range("$A:$D").AutoFilter(Field=4, Criteria1="홍길동")
+
+# 사용되어진 Cell 전체선택 후 복사 =-=-=-=-=-=
+sheet_0.Range("A1").CurrentRegion.Copy()
+
+# 복사 후 붙여 넣기 =-=-=-=-=-==-=-=-=-=-==-=
+sheet_1.Range("E1").Select()
+sheet_1.Paste()
+
+# 필터 해제 
+sheet_0.Range("A1").AutoFilter()
+
+
+
+#### WorkBook 활성화( 해당엑셀로 이동)
+workbook_0.Activate()
+
+
+#### Sheet 활성화 (해당 시트로 이동 )
+sheet_0.Activate()
+
+
+#### Bold 설정
+sheet_0.Range("K:K").Font.Bold = True
+
+
+#### Column 너비 변경
+sheet_0.Range("B:B").ColumnWidth = 3
+sheet_0.Range("D:F").ColumnWidth = 3
+
+#### row 높이 변경
+sheet_0.Range("3:3").RowHeight = 5
+sheet_0.Range("7:20").RowHeight = 5
+
+
+#### 시트 목록 가져오기 
+sheet_names = [sheet.Name for sheet in workbook_0.Sheets]
+
+
+#### 셀 서식 변경
+sheet_0.Range("AB:AB").NumberFormatLocal = "G/표준"
+#,##0 ;"Δ"#,##0 
+
+
+
+#### 데이터 -> 텍스트 나누기 ";" 세미콜론으로 된 경우
+sheet_3.Range("A1:A" + str(count_3)).TextToColumns (Destination=sheet_3.Range("A1"), DataType=1, TextQualifier=1, ConsecutiveDelimiter=False, Tab=False, Semicolon=True, Comma=False, Space=False, Other=False, TrailingMinusNumbers=True)
+
+
+
+
+#### Column 숨기기 취소
+sheet_0.Range("B:D").EntireColumn.Hidden = False
+
+
+#### Row 숨기기 취소
+sheet_0.Rows("1:6").EntireRow.Hidden = False
+
+
+
+#### 중복된 항목 제거
+sheet_0.Range("$A$1:$B$" + str(count_0) ).RemoveDuplicates(Columns=2, Header=1)
+
+Range는 전체 범위를 지정해줘야 한다. $A$1:$B$5
+
+Columns 값: 기준열 A열 1, B열 2, ....  (어떤 열을 기준으로 할 것인지)
+
+Header 값:  xlYes: 1   (내 데이터에 머리글 표시 체크 됨), xlNo: 2    (내 데이터에 머리글 표시 체크 해제)
+
+
+
+
+#### 조건부 서식 시작점 주의해서 선택 2021-02-02 16:12 확인
+=AND(COUNTBLANK(G5)=0,COUNTIF(코드!$E$3:$E$200,G5)=0)
+G5 시작 셀
+COUNTBLANK : 빈공간 이면 1, 있으면 0 
+COUNTIF (주어진 범위 안에서)조건이 맞는게 값의 개수  없을경우를 찾는 것이니깐 0 
+  
+적용대상 
+=$G$5:$G$10000
+
+
+### 색상 필터 2021-02-02 16:12 확인
+ActiveSheet.Range("$B$4:$V$348").AutoFilter Field:=6, Criteria1:=RGB(255, 0 _
+        , 0), Operator:=xlFilterCellColor
+
+xlFilterCellColor  확인은 Ctrl+I 로 확인   값은 8 
+
+ActiveSheet.Range("$B:$V").AutoFilter(Field=6, Criteria1 = RGB(255,0,0), Operator=8)
+
+
+
+#### 테두리 위쪽만 선 긋기
+c_range = excel_0.excel.ActiveSheet.Range("B546:V546")
+c_range.Borders(8).LineStyle = 1
+c_range.Borders(8).ColorIndex = 0
+c_range.Borders(8).TintAndShade = 0
+c_range.Borders(8).Weight = 2
+
+xlEdgeTop: 8
+xlContinuous: 1
+xlThin: 2
+
+Borders(xlEdgeTop).LineStyle = xlContinuous
+Borders(xlEdgeTop).ColorIndex = 0
+Borders(xlEdgeTop).TintAndShade = 0
+Borders(xlEdgeTop).Weight = xlThin
+-------------------------------------------------------
+
+
+#### 페이지 나누기
+xlPageBreakPreview: 2
+xlToRight: -4161(&HFFFFEFBF)
+
+excel_0.excel.ActiveWindow.View = 2
+excel_0.excel.ActiveSheet.VPageBreaks(1).DragOff(Direction=-4161, RegionIndex=1)
+excel_0.excel.ActiveSheet.PageSetup.PrintArea = "$B$1:$M$" + str(count_3)
+
+xlLandscape(가로): 2
+xlPortrait(세로) : 1
+excel_0.excel.ActiveSheet.PageSetup.Orientation = 2
+-------------------------------------------------------
+
+
+
+
+
+구글링 검색어: vba 엑셀 셀 값
+
+python3 모듈 win32com.client 활용? 
+
+
+
+
+
+
+
+
+
+EXCEL/ActivateSheet  이 액티비티를 위에 추가해서
+이 액티비티의 이름인 sheet_0 으로 밑에것을 Process 추가해서 사용한다.
+
+sheet_0.Range("A3").Select()  ==> 셀 위치 이동
+
+sheet_0.Range("A1").offset(3,1).Address ==> 셀 위치 주소
+
+sheet_0.Range("A1").offset(3,6).value = "AAAAAA"  ==> 해당셀에 AAAAAA 작성    offset(row, column)
+
+sheet_0.UsedRange.Find('철수').Address.replace('$','') ==> 검색한 철수 단어를 찾아 셀위치 나오게 하기
+
+
+## BA-Studio SetRangeFormat 액티비티와 동일한 기능
+sheet_0.Range('A2').Interior.ColorIndex = 6  ==> A2셀에 색깔 입히기 ( 6 이 노란색)
+sheet_0.Range('A2').Font.Bold = True ==> A2 셀에 있는 글자 굵게 하기
+sheet_0.Range('A2').Font.Size = 15 ==> A2 셀에 있는 글자 크기 키우기
+
+
+
+sheet_0.Range('A1').CurrentRegion.Select()  ==> A1 셀에서 부터 Ctrl+A
+sheet_0.Range("A1").Select()
+sheet_0.UsedRange.Select()
+
+
+
+
+cell 선택 
+ActivateSheet 다음으로
+Process 
+sheet_0.Range("A1").Select()
+
+다중 cell 선택 
+ActivateSheet 다음으로
+Process 
+sheet_0.Range("A1:D1").Select()
+
+필터넣기 
+Type Keys
+alt A T 
+
+필터넣기 다른 방법 
+Process 
+sheet_0.Range("A1").AutoFilter()
+
+
+
+현재셀주소 가져오기 
+adx =  excel_0.excel.ActiveCell.Address.replace('$','')
+
+
+
+
+
+first_address = sheet_0.UsedRange.Find('필립스').Address.replace('$','')      # 첫번째 찾은 row
+
+first_idx = sheet_0.UsedRange.Find('필립스')
+second_address = sheet_0.UsedRange.FindNext(first_idx).Address.replace('$','')  # 두번째 찾은 row
+
+
+A1 = sheet_0.UsedRange.Find('필립스')
+A2 = sheet_0.UsedRange.FindNext(A1)
+A3 = sheet_0.UsedRange.FindNext(A2)
+A4 = sheet_0.UsedRange.FindNext(A3)
+A5 = sheet_0.UsedRange.FindNext(A4)
+
+address1 = A1.Address.replace('$','')
+address2 = A2.Address.replace('$','')
+address3 = A3.Address.replace('$','')
+address4 = A4.Address.replace('$','')
+address5 = A5.Address.replace('$','')
+
+print(address1)
+print(address2)
+print(address3)
+print(address4)
+print(address5)
+
+def Search_All(activate_sheet, find_string):
+    """ 찾는 문자열의 오브젝트를 가져옴 """
+    sch1 = activate_sheet.UsedRange.Find(find_string)
+    sch2 = activate_sheet.UsedRange.FindNext(sch1)
+
+    """ 가져온 오브젝트를 엑셀주소로 변환 """    
+    adx = []
+    adx.append( sch1.Address.replace('$','') )
+    adx.append( sch2.Address.replace('$','') )
+    
+    if adx[0] == adx[1]:
+        adx.pop()
+        return adx
+    
+    str1 = adx[1]
+    
+    while adx[0] != str1:
+         sch1 = activate_sheet.UsedRange.FindNext(sch2)
+         str1 = sch1.Address.replace('$','')
+         if adx[0] == str1:
+             break
+         adx.append( str1 )
+         sch2 = sch1
+    
+    return adx
+
+
+
+
+
+
+
+
+### GetCurrentCell ###########################################################
+v = excel_0.GetActiveCellValue()      # 현재 커서의 값을 가져오기
+t = excel_0.GetActiveCell().Text      # 위와 동일한 기능
+r = excel_0.GetActiveCell().row       # 현재 커서의 row값  엑셀의 row 와 동일
+c = excel_0.GetActiveCell().column    # 현재 커서의 column 값 엑셀 A면 1 이다.
+d = excel_0.GetActiveCell().Address.replace("$","")  # 현재 커서의 셀주소를 가져옴
+
+# 사용법 Type keys 으로 cell 이동후 현재 커서의 위치를 알아옴
+
+# column index 숫자를 엑셀 column 영문자로
+def Get_excel_column_alphabet(idx):
+    parent = [''] + list(map(chr, range(ord('A'), ord('Z')+1)))
+    child = list(map(chr, range(ord('A'), ord('Z')+1)))
+
+    excel_column_lst = []
+
+    for i in parent:
+        for j in child:
+    	    excel_column_lst.append(i+j)
+
+    return excel_column_lst[idx - 1]
+
+column_idx = Get_excel_column_alphabet(c)
+
+column_idx + str(r)  # 찾은 셀 주소
+
+###############################################################################
+
+
+
+
+
+# self.ActiveSheet().Cells(row, col)
+sheet_0.Cells(1,1)  ==> 엑셀 A1 해당되는 값을 가져 옴.
+
+# CopyAndPasteToButtonRange  E1 복사 대상 소스,  E2:E9 복사위치
+sheet_0.Range("E1").Copy(sheet_0.Range("E2:E9"))
+
+#sheet.Range(fromRange).Copy(sheet.Range(toRange))
+sheet_0.Range("D1:D4").Copy(sheet_0.Range("F1:F4"))
+
+
+
+# row count
+sheet_0.UsedRange.Rows.Count
+
+
+
+
+
+
+
+
+
+# 엑셀 필터 하는 방법
+F5 으로 셀을 이동 후 Type Keys 로 사용 후
+Ctrl+C  클립 보드로 복사 후
+클립보드의 내용을 배열로 받아서 사용한다.
+
+
+# EXCEL.Attach 엑셀 객체 잡을때 사용 WIN32.Maximize Automation 과 같이 사용하면 됨.
+
+
+
+
+sheet_0.Range("A1").GetActiveCell().Row
+
+excel_0.ActiveCell.Value
+
+
+
+
+
+#### 버블 소트 
+def bubble(rLst):
+    indexing_length = len(rLst) - 1
+    sorted = False
+    while not sorted:
+        sorted = True
+        for i in range(0, indexing_length):
+            if rLst[i] > rLst[i+1]:
+                sorted = False
+                rLst[i], rLst[i+1] = rLst[i+1], rLst[i]
+

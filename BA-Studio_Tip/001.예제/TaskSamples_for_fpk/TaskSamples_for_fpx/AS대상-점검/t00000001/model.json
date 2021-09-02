@@ -1,0 +1,35 @@
+{
+  "contents": [
+    {
+      "id": "8Ux",
+      "script": " \"AS대상점검\"",
+      "parameters": {},
+      "title": "Process",
+      "comment": "",
+      "next": "ySd",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "ySd",
+      "script": "ExecuteOther()",
+      "parameters": {
+        "path": "t00000002"
+      },
+      "title": "AS대상점검",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Predefined Process"
+    }
+  ],
+  "packages": [
+    "__BuiltIn__"
+  ]
+}

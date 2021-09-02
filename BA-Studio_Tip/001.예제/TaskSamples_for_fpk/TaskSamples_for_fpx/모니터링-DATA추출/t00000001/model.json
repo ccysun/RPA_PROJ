@@ -1,0 +1,35 @@
+{
+  "contents": [
+    {
+      "id": "QpP",
+      "script": " \"모니터링-DATA추출\"",
+      "parameters": {},
+      "title": "Process",
+      "comment": "",
+      "next": "SeJ",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "SeJ",
+      "script": "ExecuteOther()",
+      "parameters": {
+        "path": "t00000002"
+      },
+      "title": "모니터링_DATA추출",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Predefined Process"
+    }
+  ],
+  "packages": [
+    "__BuiltIn__"
+  ]
+}

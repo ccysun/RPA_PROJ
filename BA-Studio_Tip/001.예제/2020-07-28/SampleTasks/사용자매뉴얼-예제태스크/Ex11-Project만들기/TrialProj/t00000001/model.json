@@ -1,0 +1,82 @@
+{
+  "contents": [
+    {
+      "id": "aOI",
+      "script": "\"Main Task\"",
+      "parameters": {},
+      "title": "Process",
+      "comment": "",
+      "next": "4qA",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "4qA",
+      "script": "ExecuteOther()",
+      "parameters": {
+        "path": "t00000002"
+      },
+      "title": "Sub1",
+      "comment": "",
+      "next": "sym",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Predefined Process"
+    },
+    {
+      "id": "sym",
+      "script": "ExecuteOther()",
+      "parameters": {
+        "path": "t00000003"
+      },
+      "title": "Sub2",
+      "comment": "",
+      "next": "Kfd",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Predefined Process"
+    },
+    {
+      "id": "Kfd",
+      "script": "ExecuteOther()",
+      "parameters": {
+        "path": "t00000004"
+      },
+      "title": "Sub3",
+      "comment": "",
+      "next": "NhM",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Predefined Process"
+    },
+    {
+      "id": "NhM",
+      "script": "WIN32.MessageBox()",
+      "parameters": {
+        "text": "Done",
+        "title": ""
+      },
+      "title": "MessageBox",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "WIN32/MessageBox"
+    }
+  ],
+  "packages": [
+    "__BuiltIn__",
+    "WIN32"
+  ]
+}

@@ -1,0 +1,10 @@
+
+# 파일 확장자 확인
+fileName = collection_0[0]
+
+splitFile = fileName.split(".")
+
+extName = splitFile[-1].upper()
+
+If(extName == "XLSX" or extName == "XLS")
+

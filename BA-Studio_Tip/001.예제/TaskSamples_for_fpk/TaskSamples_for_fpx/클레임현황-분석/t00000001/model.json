@@ -1,0 +1,35 @@
+{
+  "contents": [
+    {
+      "id": "ell",
+      "script": " \"클레임현황-분석\"",
+      "parameters": {},
+      "title": "Process",
+      "comment": "",
+      "next": "MKu",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Process"
+    },
+    {
+      "id": "MKu",
+      "script": "ExecuteOther()",
+      "parameters": {
+        "path": "t00000002"
+      },
+      "title": "클레임현황_분석",
+      "comment": "",
+      "next": "end",
+      "except": {
+        "method": "none",
+        "param": ""
+      },
+      "command": "BuiltIn/Predefined Process"
+    }
+  ],
+  "packages": [
+    "__BuiltIn__"
+  ]
+}

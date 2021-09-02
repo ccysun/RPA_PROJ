@@ -1,0 +1,35 @@
+
+## {} 안에 문자열 넣기 
+>>> str1 = "파일 이름은 {}입니다. "
+>>> str2 = str1.format('ffff.xlsx')
+>>> str2
+'파일 이름은 ffff.xlsx입니다. '
+
+
+## 파일확장자 뺀 파일명 
+>>> str1 = "20210419_1115RPA 거래명세서(국제일렉)210419.xlsx"
+>>> str2 = str1.split(".")
+>>> str3 = "".join(str2[:-1])
+>>> str3
+'20210419_1115RPA 거래명세서(국제일렉)210419'
+
+
+
+## Ecount 실패건 파일명 추가 
+엑셀 파일명 {{G["d"]["작업폴더10"]+Item()}}
+ excelFile=Item()
+ fileSplit=excelFile.split('.')
+ file=fileSplit[0]
+ G["d"].update({"fileName" :  file})   거래처엑셀파일명
+
+
+date_1: %Y%m%d_%H%M
+
+now2=date_1+ '_'+G["d"]["fileName"]+'_ecount등록실패'+'.xlsx'
+G["d"].update({"finalName" :  now2})
+
+Ecount 등록실패건 파일명 메일내용으로 넣음. 
+ G["d"]["실패"].format(d1fIR)
+ 
+
+
